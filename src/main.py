@@ -43,13 +43,15 @@ if __name__ == '__main__':
         BOT_API_TOKEN = os.getenv('BOT_API_TOKEN')
     else:
         pass
-
+    
     updater = Updater(token=BOT_API_TOKEN, use_context=True)
+
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler('start', start))
+    
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
-
+    
     if not args.is_local:
         PORT = os.getenv('PORT')
 
