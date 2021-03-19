@@ -21,9 +21,7 @@ def empty_message(update, context):
     if update.message.new_chat_members:
         for new_member in update.message.new_chat_members:
             # Bot added to group
-            if new_member.username == 'becdbot':
-                pass
-            else:
+            if new_member.username != 'becdbot':
                 return send_welcome(update, context, new_member)
 
 if __name__ == '__main__':
@@ -31,6 +29,7 @@ if __name__ == '__main__':
     import os
     import argparse
 
+    appname = 'becdbot'
     parser = argparse.ArgumentParser(description='BECD Bot')
     parser.add_argument('--local',
                         dest='is_local',
@@ -57,7 +56,7 @@ if __name__ == '__main__':
         updater.start_webhook(listen="0.0.0.0",
                                 port=int(PORT),
                                 url_path=TOKEN,
-                                webhook_url="https://"+ AppName + ".herokuapp.com/" + BOT_API_TOKEN)
+                                webhook_url="https://"+ appname + ".herokuapp.com/" + BOT_API_TOKEN)
     else:
         updater.start_polling()
 
