@@ -21,7 +21,7 @@ def empty_message(update, context):
     if update.message.new_chat_members:
         for new_member in update.message.new_chat_members:
             # Bot added to group
-            if new_member.username == 'icmc-lgbt-welcome-bot':
+            if new_member.username == 'becdbot':
                 pass
             else:
                 return send_welcome(update, context, new_member)
