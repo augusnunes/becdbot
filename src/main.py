@@ -49,7 +49,6 @@ if __name__ == '__main__':
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler('start', start))
-    
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
     
     if not args.is_local:
@@ -57,7 +56,7 @@ if __name__ == '__main__':
 
         updater.start_webhook(listen="0.0.0.0",
                                 port=int(PORT),
-                                url_path=TOKEN,
+                                url_path=BOT_API_TOKEN,
                                 webhook_url="https://"+ appname + ".herokuapp.com/" + BOT_API_TOKEN)
     else:
         updater.start_polling()
