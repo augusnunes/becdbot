@@ -1,7 +1,23 @@
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters
+from pendulum import today, datetime
+import random
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Bot do BECD")
+
+def aulas(update, context):
+    hoje = today('America/Sao_Paulo')
+    aulas = datetime(2021, 4, 12)
+    diff = aulas.diff(hoje).in_days()
+    frases = [
+        'Caalma, caraio. As aulas vão começar em',
+        'Porra, bixo. As aulas começam em',
+        'Infelizmente já teremos aulas em',
+        'Poorrraaaa, não me lembra que as aulas começam em'
+    ]
+    frase = random.choice(frases)
+    msg = f'{frase} {diff} dias'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def send_welcome(update, context, new_member):
     welcome_message = """Bem-vindeee, @{}!
@@ -49,6 +65,7 @@ if __name__ == '__main__':
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler('start', start))
+    dp.add_handler(CommandHandler('aulas', aulas))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
     
     if not args.is_local:
