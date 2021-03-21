@@ -19,6 +19,9 @@ def aulas(update, context):
     msg = f'{frase} {diff} dias'
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
+def maquera(update, context):
+    context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
+
 def send_welcome(update, context, new_member):
     welcome_message = """Bem-vindeee, @{}!
 Se apresenta pra gente, é bixo ou veterano? 
@@ -65,6 +68,7 @@ if __name__ == '__main__':
 
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('aulas', aulas))
+    dp.add_handler(CommandHandler('maquera', maquera))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
 
     if not args.is_local:
