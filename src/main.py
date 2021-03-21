@@ -6,11 +6,8 @@ def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Bot do BECD")
 
 """
-def divulga(update, context):
-    origMsg = update.message.reply_to_message
-
-    if origMsg and origMsg.txt:
-        context.
+def fwd(update, context):
+    
 """
 
 def aulas(update, context):
@@ -31,13 +28,19 @@ def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
 def send_welcome(update, context, new_member):
-    welcome_message = """Bem-vindeee, @{}!
+    if new_member != None:
+        welcome_message = """Bem-vindeee, @{}!
 Se apresenta pra gente, é bixo ou veterano? 
 Arroz em baixo ou em cima do feijão?
     """.format(new_member.username)
-
+    else:
+        welcome_message = """Bem-vindeee, @{} ({})!
+Se apresenta pra gente, é bixo ou veterano? 
+Arroz em baixo ou em cima do feijão?
+    """.format(new_member.id, new_member.first_name)
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text=welcome_message)
+
 
 def empty_message(update, context):
     """
