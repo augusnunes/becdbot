@@ -7,7 +7,7 @@ def start(update, context):
 
 """
 def fwd(update, context):
-    
+
 """
 
 def aulas(update, context):
@@ -28,7 +28,7 @@ def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
 def send_welcome(update, context, new_member):
-    if new_member != None:
+    if new_member.username != None:
         welcome_message = """Bem-vindeee, @{}!
 Se apresenta pra gente, é bixo ou veterano? 
 Arroz em baixo ou em cima do feijão?
