@@ -5,6 +5,14 @@ import random
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Bot do BECD")
 
+"""
+def divulga(update, context):
+    origMsg = update.message.reply_to_message
+
+    if origMsg and origMsg.txt:
+        context.
+"""
+
 def aulas(update, context):
     hoje = today('America/Sao_Paulo')
     aulas = datetime(2021, 4, 12)
