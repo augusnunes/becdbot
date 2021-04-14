@@ -109,7 +109,7 @@ if __name__ == '__main__':
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
     
     
-    if not True:#args.is_local:
+    if not args.is_local:
         PORT = os.getenv('PORT')
 
         updater.start_webhook(listen="0.0.0.0",
