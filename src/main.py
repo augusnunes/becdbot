@@ -48,7 +48,7 @@ def aulas(update, context):
 
 def semestre(update, context):
     hoje = today('America/Sao_Paulo')
-    aulas = datetime(2021, 7, 4)
+    aulas = datetime(2021, 7, 31)
     diff = aulas.diff(hoje).in_days()
     frases = [
         'Por favor, eu não aguento mais {} dias'
