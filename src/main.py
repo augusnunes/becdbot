@@ -26,35 +26,54 @@ def fwd(update, context):
                 else:
                     context.bot.send_message(chat_id=update.effective_chat.id, text="Ai cansei aqui, manda de novo...")
             except:
-                pass
-    
+                pass 
 
 def aulas(update, context):
-    """
+    
     hoje = today('America/Sao_Paulo')
-    aulas = datetime(2021, 4, 12)
+    aulas = datetime(2021, 8, 17)
     diff = aulas.diff(hoje).in_days()
-    frases = [
-        'Caalma, caraio. As aulas vão começar em',
-        'Porra, bixo. As aulas começam em',
-        'Infelizmente já teremos aulas em',
-        'Poorrraaaa, não me lembra que as aulas começam em'
-    ]
-    frase = random.choice(frases)
-    msg = f'{frase} {diff} dias'
-    """
-    msg = "As aulas já começaram, manda /semestre pra saber quando o semestre vai dar a folguinha."
+    
+    if hoje < aulas
+        frases = [
+            'Caalma, caraio. As aulas vão começar em',
+            'Porra, bixo. As aulas começam em',
+            'Infelizmente já teremos aulas em',
+            'Poorrraaaa, não me lembra que as aulas começam em'
+        ]
+        frase = random.choice(frases)
+        msg = f'{frase} {diff} dias'
+    
+    else if hoje > aulas:
+        msg = "Infelizmente, as aulas já começaram. Manda /semestre pra saber quando o semestre vai dar a folguinha."
+
+    else:
+        msg = "É hj que começa tudo de novo pohaaAaaAa fodeu :'("
+    
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def semestre(update, context):
     hoje = today('America/Sao_Paulo')
-    aulas = datetime(2021, 7, 31)
+    aulas = datetime(2021, 12, 21)
     diff = aulas.diff(hoje).in_days()
-    frases = [
-        'Por favor, eu não aguento mais {} dias'
-    ]
-    frase = random.choice(frases)
-    msg = frase.format(diff)
+    # mini ferias
+    aulas2 = datetime(2022, 1, 14)
+    diff2 = aulas.diff(hoje).in_days()
+    
+    volta = datetime(2021, 8, 17)
+    if hoje >= volta
+        frases = [
+            'Por favor, eu não aguento mais {} dias. Até o fim em janeiro, {} dias.',
+            'Tenhamos fé, ainda faltam {} dias para o recesso, e {} dias para o fim de tudo',
+            'Sinto muito em lhe informar que restam {} dias para as mini férias, e {} dias para o término do semestre',
+            'Desculpe, faltam {} dias para o final do semestre este ano e mais {} dias pro final real oficial'
+        ]
+        frase = random.choice(frases)
+        msg = frase.format(diff, diff2)
+
+    else:
+        msg = "De alguma maneira, as aulas ainda não começaram. Manda /aulas pra saber quando elas voltarão."
+    
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def maquera(update, context):
