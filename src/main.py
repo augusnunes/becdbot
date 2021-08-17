@@ -34,7 +34,7 @@ def aulas(update, context):
     aulas = datetime(2021, 8, 17)
     diff = aulas.diff(hoje).in_days()
     
-    if hoje > aulas
+    if hoje > aulas:
         frases = [
             'Caalma, caraio. As aulas vão começar em',
             'Porra, bixo. As aulas começam em',
@@ -44,7 +44,7 @@ def aulas(update, context):
         frase = random.choice(frases)
         msg = f'{frase} {diff} dias'
     
-    else if hoje < aulas:
+    elif hoje < aulas:
         msg = "Infelizmente, as aulas já começaram. Manda /semestre pra saber quando o semestre vai dar a folguinha."
 
     else:
@@ -61,7 +61,7 @@ def semestre(update, context):
     diff2 = aulas.diff(hoje).in_days()
     
     volta = datetime(2021, 8, 17)
-    if hoje <= volta
+    if hoje <= volta:
         frases = [
             'Por favor, eu não aguento mais {} dias. Até o fim em janeiro, {} dias.',
             'Tenhamos fé, ainda faltam {} dias para o recesso, e {} dias para o fim de tudo',
