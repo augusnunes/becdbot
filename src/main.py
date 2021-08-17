@@ -54,9 +54,10 @@ def aulas(update, context):
 
 def semestre(update, context):
     hoje = today('America/Sao_Paulo')
+    # mini ferias
     aulas = datetime(2021, 12, 21)
     diff = aulas.diff(hoje).in_days()
-    # mini ferias
+    # ferias ferias
     aulas2 = datetime(2022, 1, 14)
     diff2 = aulas2.diff(hoje).in_days()
     
@@ -69,7 +70,7 @@ def semestre(update, context):
             'Desculpe, faltam {} dias para o final do semestre este ano e mais {} dias pro final real oficial'
         ]
         frase = random.choice(frases)
-        msg = frase.format(diff2, diff)
+        msg = frase.format(diff, diff2)
 
     else:
         msg = "De alguma maneira, as aulas ainda não começaram. Manda /aulas pra saber quando elas voltarão."
