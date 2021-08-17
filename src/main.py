@@ -69,7 +69,7 @@ def semestre(update, context):
             'Desculpe, faltam {} dias para o final do semestre este ano e mais {} dias pro final real oficial'
         ]
         frase = random.choice(frases)
-        msg = frase.format(diff, diff2)
+        msg = frase.format(diff2, diff)
 
     else:
         msg = "De alguma maneira, as aulas ainda não começaram. Manda /aulas pra saber quando elas voltarão."
