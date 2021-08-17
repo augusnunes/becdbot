@@ -58,7 +58,7 @@ def semestre(update, context):
     diff = aulas.diff(hoje).in_days()
     # mini ferias
     aulas2 = datetime(2022, 1, 14)
-    diff2 = aulas.diff(hoje).in_days()
+    diff2 = aulas2.diff(hoje).in_days()
     
     volta = datetime(2021, 8, 17)
     if hoje <= volta:
