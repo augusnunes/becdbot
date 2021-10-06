@@ -107,7 +107,6 @@ def trancar(update, context):
                     return
             else:
                 txt = "Lamento, seu trancamento falhou."
-                print(txt)
                 context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
                 break
 
