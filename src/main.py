@@ -80,7 +80,10 @@ def semestre(update, context):
 def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
-
+def trancar(update, context)
+    txt = ["Desculpe, não tá rolando trancar o curso não.", "Lamento em te ver ir embora. Responda sim e aguarde para o curso ser trancado....."]
+    msg = random.choice(txt)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def send_welcome(update, context, new_member):
     welcome_message = """Bem-vinde, [@{}](tg://user?id={})!
@@ -126,6 +129,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('maquera', maquera))
     dp.add_handler(CommandHandler('fwd', fwd))
     dp.add_handler(CommandHandler('semestre', semestre))
+    dp.add_handler(CommandHandler('trancar', trancar))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
     
     
