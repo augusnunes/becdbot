@@ -80,13 +80,36 @@ def semestre(update, context):
 def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
-def trancar(update, context)
-    if random.random() < 0.99:
+def trancar(update, context):
+    if random.random() < 0.79:
         txt = ["Desculpe, não tá rolando trancar o curso não."]
+        context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
+        return
     else:
-        txt = ["Lamento em te ver ir embora. Responda sim e aguarde para o curso ser trancado....."]
-    
-    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
+        txt = ["Vamos iniciar seu processo de trancamento!"]
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+
+        list = ["Enviando emojis ofensivos para a grad...", "Passando trote para a PPUSP...",
+        "Devolvendo bandeija com restos de comida...", "Ligando para a Cibele...",
+        "Avisando o governador...", "Denunciando a turma por cola...",
+        "Chamando engenheiros de Cientistas de Dados....", "Usando drogas na universidade",
+        "Incendiando empréstimos da biblioteca...", "Falando que estuda na federal..."]
+
+        while True:
+            if random.random() < 0.55:
+                if len(list) > 0:
+                    x = random.choice(list)
+                    list.remove(x)
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=x)
+                else:   
+                    txt = "Você chegou mesmo até esse ponto? Não vai embora pfvr :("
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                    return
+            else:
+                txt = "Lamento, seu trancamento falhou."
+                print(txt)
+                context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                break
 
 def send_welcome(update, context, new_member):
     welcome_message = """Bem-vinde, [@{}](tg://user?id={})!
