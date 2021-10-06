@@ -81,8 +81,11 @@ def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
 def trancar(update, context)
-    txt = ["Desculpe, não tá rolando trancar o curso não.", "Lamento em te ver ir embora. Responda sim e aguarde para o curso ser trancado....."]
-    msg = random.choice(txt)
+    if random.random() < 0.99:
+        txt = ["Desculpe, não tá rolando trancar o curso não."]
+    else:
+        txt = ["Lamento em te ver ir embora. Responda sim e aguarde para o curso ser trancado....."]
+    
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def send_welcome(update, context, new_member):
