@@ -82,18 +82,19 @@ def maquera(update, context):
 
 def trancar(update, context):
     if random.random() < 0.79:
-        txt = ["Desculpe, não tá rolando trancar o curso não."]
-        context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
+        txt = "Desculpe, não tá rolando trancar o curso não."
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
         return
     else:
-        txt = ["Vamos iniciar seu processo de trancamento!"]
+        txt = "Vamos iniciar seu processo de trancamento!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
         list = ["Enviando emojis ofensivos para a grad...", "Passando trote para a PPUSP...",
         "Devolvendo bandeija com restos de comida...", "Ligando para a Cibele...",
         "Avisando o governador...", "Denunciando a turma por cola...",
-        "Chamando engenheiros de Cientistas de Dados....", "Usando drogas na universidade",
-        "Incendiando empréstimos da biblioteca...", "Falando que estuda na federal..."]
+        "Chamando engenheiros de Cientistas de Dados....", "Usando drogas na universidade....",
+        "Incendiando empréstimos da biblioteca...", "Falando que estuda na federal...",
+        "Instalando Microsoft Excel...", "Fechando a comanda no Podrão...."]
 
         while True:
             if random.random() < 0.55:
