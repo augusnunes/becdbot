@@ -102,9 +102,13 @@ def trancar(update, context):
                     x = random.choice(list)
                     list.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
-                else:   
+                else:
+                    date_unban = today('America/Sao_Paulo').add(minutes=2)
                     txt = "Você chegou mesmo até esse ponto? Não vai embora pfvr :("
                     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                    context.bot.ban_chat_member(chat_id=update.effective_chat.id,
+                                                user_id=update.effective_message.from_user.id,
+                                                until_date=date_unban)
                     return
             else:
                 txt = "Lamento, seu trancamento falhou."
