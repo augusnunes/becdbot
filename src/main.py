@@ -80,7 +80,36 @@ def semestre(update, context):
 def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
+def trancar(update, context):
+    if random.random() < 0.79:
+        txt = "Desculpe, não tá rolando trancar o curso não."
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+        return
+    else:
+        txt = "Vamos iniciar seu processo de trancamento!"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
+        list = ["Enviando emojis ofensivos para a grad...", "Passando trote para a PPUSP...",
+        "Devolvendo bandeija com restos de comida...", "Ligando para a Cibele...",
+        "Avisando o governador...", "Denunciando a turma por cola...",
+        "Chamando engenheiros de Cientistas de Dados....", "Usando drogas na universidade....",
+        "Incendiando empréstimos da biblioteca...", "Falando que estuda na federal...",
+        "Instalando Microsoft Excel...", "Fechando a comanda no Podrão...."]
+
+        while True:
+            if random.random() < 0.55:
+                if len(list) > 0:
+                    x = random.choice(list)
+                    list.remove(x)
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=x)
+                else:   
+                    txt = "Você chegou mesmo até esse ponto? Não vai embora pfvr :("
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                    return
+            else:
+                txt = "Lamento, seu trancamento falhou."
+                context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                break
 
 def send_welcome(update, context, new_member):
     welcome_message = """Bem-vinde, [@{}](tg://user?id={})!
@@ -126,6 +155,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('maquera', maquera))
     dp.add_handler(CommandHandler('fwd', fwd))
     dp.add_handler(CommandHandler('semestre', semestre))
+    dp.add_handler(CommandHandler('trancar', trancar))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
     
     
