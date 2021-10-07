@@ -81,7 +81,7 @@ def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
 def trancar(update, context):
-    if random.random() < 0.79:
+    if random.random() < 0.9:
         txt = "Desculpe, não tá rolando trancar o curso não."
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
         return
@@ -97,7 +97,8 @@ def trancar(update, context):
         "Instalando Microsoft Excel...", "Fechando a comanda no Podrão...."]
 
         while True:
-            if random.random() < 0.55:
+            # Quem usar isso tem que ser kikado, fodase
+            if random.random() < 0.99:
                 if len(list) > 0:
                     x = random.choice(list)
                     list.remove(x)
