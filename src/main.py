@@ -108,7 +108,7 @@ def trancar(update, context):
                     txt = "Você chegou mesmo até esse ponto? Não vai embora pfvr :("
                     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
                     context.bot.ban_chat_member(chat_id=update.effective_chat.id,
-                                                user_id=update.effective_message.from_user.id,
+                                                user_id=update.effective_user.id,
                                                 until_date=date_unban)
                     return
             else:
