@@ -1,6 +1,8 @@
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters
-from pendulum import today, datetime
+from pendulum import today, datetime, now
 import random
+
+LINK_GRUPO = os.getenv('LINK_GRUPO')
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Já em funcionamento.")
@@ -104,12 +106,14 @@ def trancar(update, context):
                     list.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
-                    date_unban = today('America/Sao_Paulo').add(minutes=2)
-                    txt = "Você chegou mesmo até esse ponto? Não vai embora pfvr :("
+                    date_unban = now().add(minutes=5).int_timestamp
+                    txt = "Tudo bem, concluindo trancamento..."
+                    msg = f"Trancamento concluído, haha. Aguarda 5 minutos e entra no grupo novamente: {LINK_GRUPO}"
                     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
                     context.bot.kick_chat_member(chat_id=update.effective_chat.id,
-                                                user_id=update.effective_user.id,
-                                                until_date=date_unban)
+                                                 user_id=update.effective_user.id,
+                                                 until_date=date_unban)
+                    context.bot.send_message(chat_id=update.effective_user.id, text=msg)
                     return
             else:
                 txt = "Lamento, seu trancamento falhou."
