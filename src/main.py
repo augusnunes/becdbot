@@ -95,7 +95,7 @@ def trancar(update, context):
         txt = "Vamos iniciar seu processo de trancamento!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
-        list = [
+        l = [
             "Enviando emojis ofensivos para a grad...",
             "Passando trote para a PPUSP...",
             "Devolvendo bandeija com restos de comida...",
@@ -111,11 +111,10 @@ def trancar(update, context):
         ]
 
         while True:
-            # Quem usar isso tem que ser kikado, fodase
             if random.random() < 0.99:
-                if len(list) > 0:
-                    x = random.choice(list)
-                    list.remove(x)
+                if len(l) > 0:
+                    x = random.choice(l)
+                    l.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
                     date_unban = now().add(minutes=5).int_timestamp
