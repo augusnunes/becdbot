@@ -117,14 +117,17 @@ def trancar(update, context):
                     l.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
-                    date_unban = now().add(minutes=5).int_timestamp
-                    txt = "Tudo bem, concluindo trancamento..."
-                    msg = f"Trancamento concluído, haha. Aguarda 5 minutos e entra no grupo novamente: {LINK_GRUPO}"
-                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
-                    context.bot.kick_chat_member(chat_id=update.effective_chat.id,
-                                                 user_id=update.effective_user.id,
-                                                 until_date=date_unban)
-                    context.bot.send_message(chat_id=update.effective_user.id, text=msg)
+                    try:
+                        date_unban = now().add(minutes=5).int_timestamp
+                        txt = "Tudo bem, concluindo trancamento..."
+                        msg = f"Trancamento concluído, haha. Aguarda 5 minutos e entra no grupo novamente: {LINK_GRUPO}"
+                        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                        context.bot.kick_chat_member(chat_id=update.effective_chat.id,
+                                                    user_id=update.effective_user.id,
+                                                    until_date=date_unban)
+                        context.bot.send_message(chat_id=update.effective_user.id, text=msg)
+                    except:
+                        print("Não foi possível trancar o curso")
                     return
             else:
                 txt = "Lamento, seu trancamento falhou."
