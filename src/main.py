@@ -1,6 +1,8 @@
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters
 from pendulum import today, datetime, now
 import random
+import os
+import argparse
 
 LINK_GRUPO = os.getenv('LINK_GRUPO')
 
@@ -158,9 +160,6 @@ def empty_message(update, context):
 
 
 if __name__ == '__main__':
-
-    import os
-    import argparse
 
     appname = 'becdbot'
     parser = argparse.ArgumentParser(description='BECD Bot')
