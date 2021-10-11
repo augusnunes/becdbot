@@ -1,6 +1,11 @@
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters
-from pendulum import today, datetime
+from pendulum import today, datetime, now
 import random
+import os
+import argparse
+
+LINK_GRUPO = os.getenv('LINK_GRUPO')
+
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Já em funcionamento.")
@@ -10,9 +15,9 @@ def fwd(update, context):
     is_reply = update.message.reply_to_message
     fwd_name = '@becdbotfwd'
     
-    if is_reply: # encaminha para o fwd
+    if is_reply:  # encaminha para o fwd
         context.bot.forwardMessage(fwd_name, update.effective_chat.id, is_reply.message_id)
-    else: # encaminha para o grupo
+    else:  # encaminha para o grupo
         max_id = 10
         max_tries = max_id*5
         tries = 0
@@ -20,13 +25,13 @@ def fwd(update, context):
             message_id = random.randint(0, max_id)
             try:
                 if tries <= max_tries: 
-                    context.bot.forwardMessage(update.effective_chat.id, fwd_name, message_id )
+                    context.bot.forwardMessage(update.effective_chat.id, fwd_name, message_id)
                     break
-                    tries+=1
                 else:
                     context.bot.send_message(chat_id=update.effective_chat.id, text="Ai cansei aqui, manda de novo...")
             except:
                 pass 
+
 
 def aulas(update, context):
     
@@ -51,6 +56,7 @@ def aulas(update, context):
         msg = "É hj que começa tudo de novo pohaaAaaAa fodeu :'("
     
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
+
 
 def semestre(update, context):
     hoje = today('America/Sao_Paulo')
@@ -77,8 +83,10 @@ def semestre(update, context):
     
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
+
 def maquera(update, context):
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
+
 
 def trancar(update, context):
     if random.random() < 0.2:
@@ -89,41 +97,60 @@ def trancar(update, context):
         txt = "Vamos iniciar seu processo de trancamento!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
-        list = ["Enviando emojis ofensivos para a grad...", "Passando trote para a PPUSP...",
-        "Devolvendo bandeija com restos de comida...", "Ligando para a Cibele...",
-        "Avisando o governador...", "Denunciando a turma por cola...",
-        "Chamando engenheiros de Cientistas de Dados....", "Usando drogas na universidade....",
-        "Incendiando empréstimos da biblioteca...", "Falando que estuda na federal...",
-        "Instalando Microsoft Excel...", "Fechando a comanda no Podrão...."]
+        l = [
+            "Enviando emojis ofensivos para a grad...",
+            "Passando trote para a PPUSP...",
+            "Devolvendo bandeija com restos de comida...",
+            "Ligando para a Cibele...",
+            "Avisando o governador...",
+            "Denunciando a turma por cola...",
+            "Chamando engenheiros de Cientistas de Dados....",
+            "Usando drogas na universidade....",
+            "Incendiando empréstimos da biblioteca...",
+            "Falando que estuda na federal...",
+            "Instalando Microsoft Excel...",
+            "Fechando a comanda no Podrão...."
+        ]
 
         while True:
-            # Quem usar isso tem que ser kikado? fodase
-            if random.random() < 0.89:
-                if len(list) > 0:
-                    x = random.choice(list)
-                    list.remove(x)
+            if random.random() < 0.80:
+                if len(l) > 0:
+                    x = random.choice(l)
+                    l.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
-                    date_unban = today('America/Sao_Paulo').add(minutes=1)
-                    txt = """[@{}](tg://user?id={}) conseguiu trancar o curso e foi embora!
-                    """.format(update.effective_user.first_name, update.effective_user.id)
-        
-                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
-                    context.bot.kick_chat_member(chat_id=update.effective_chat.id,
-                                                user_id=update.effective_user.id,
-                                                until_date=date_unban)
+                    try:
+                        mins = 3
+                        date_unban = now().add(minutes=mins).int_timestamp
+                        txt = "Tudo bem, concluindo trancamento..."
+                        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                        txt = """[@{}](tg://user?id={}) conseguiu trancar o curso e foi embora!
+                        """.format(update.effective_user.first_name, update.effective_user.id)
+                        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                        
+                        msg = f"Trancamento concluído, haha. Aguarda {mins} minutos e entra no grupo novamente: {LINK_GRUPO}"
+                        
+                        context.bot.kick_chat_member(chat_id=update.effective_chat.id,
+                                                    user_id=update.effective_user.id,
+                                                    until_date=date_unban)
+                        context.bot.send_message(chat_id=update.effective_user.id, text=msg)
+                    except:
+                        print("Não foi possível trancar o curso")
                     return
             else:
                 txt = "Lamento, seu trancamento falhou."
                 context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
                 break
 
+
 def send_welcome(update, context, new_member):
     welcome_message = """Bem-vinde, [@{}](tg://user?id={})!
     """.format(new_member.first_name, new_member.id)
 
     context.bot.send_message(chat_id=update.effective_chat.id,
-                             text=welcome_message, parse_mode='Markdown')
+                             text=welcome_message,
+                             parse_mode='Markdown')
+
 
 def empty_message(update, context):
     """
@@ -137,10 +164,8 @@ def empty_message(update, context):
             if new_member.username != 'becdbot':
                 return send_welcome(update, context, new_member)
 
-if __name__ == '__main__':
 
-    import os
-    import argparse
+if __name__ == '__main__':
 
     appname = 'becdbot'
     parser = argparse.ArgumentParser(description='BECD Bot')
@@ -164,15 +189,15 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('semestre', semestre))
     dp.add_handler(CommandHandler('trancar', trancar))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
-    
-    
+
     if not args.is_local:
         PORT = os.getenv('PORT')
 
         updater.start_webhook(listen="0.0.0.0",
-                                port=int(PORT),
-                                url_path=BOT_API_TOKEN,
-                                webhook_url="https://"+ appname + ".herokuapp.com/" + BOT_API_TOKEN)
+                              port=int(PORT),
+                              url_path=BOT_API_TOKEN,
+                              webhook_url=f"https://{appname}.herokuapp.com/{BOT_API_TOKEN}"
+                              )
     else:
         updater.start_polling()
 
