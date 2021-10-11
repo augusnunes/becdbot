@@ -89,7 +89,7 @@ def maquera(update, context):
 
 
 def trancar(update, context):
-    if random.random() < 0.1:
+    if random.random() < 0.2:
         txt = "Desculpe, não tá rolando trancar o curso não."
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
         return
@@ -113,17 +113,23 @@ def trancar(update, context):
         ]
 
         while True:
-            if random.random() < 0.99:
+            if random.random() < 0.80:
                 if len(l) > 0:
                     x = random.choice(l)
                     l.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
                     try:
-                        date_unban = now().add(minutes=5).int_timestamp
+                        mins = 3
+                        date_unban = now().add(minutes=mins).int_timestamp
                         txt = "Tudo bem, concluindo trancamento..."
-                        msg = f"Trancamento concluído, haha. Aguarda 5 minutos e entra no grupo novamente: {LINK_GRUPO}"
                         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                        txt = """[@{}](tg://user?id={}) conseguiu trancar o curso e foi embora!
+                        """.format(update.effective_user.first_name, update.effective_user.id)
+                        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                        
+                        msg = f"Trancamento concluído, haha. Aguarda {mins} minutos e entra no grupo novamente: {LINK_GRUPO}"
+                        
                         context.bot.kick_chat_member(chat_id=update.effective_chat.id,
                                                     user_id=update.effective_user.id,
                                                     until_date=date_unban)
