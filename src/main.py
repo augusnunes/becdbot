@@ -146,10 +146,10 @@ def feriado(update, context):
     feriados = holidays.CountryHoliday('BRA', prov=None, state='SP', years = date.today().year)
     weekDays = ("segunda. Tá safe!",
             "terça. Bora emendar clan!!1!",
-            "quarta. Sem palavras para essa atrocidade.",
+            "quarta, bem no meio da semana...",
             "quinta. E vamos de emenda fml!!",
             "sexta. Feriadou!",
-            "sabado. Perdeu mais um.",
+            "sabado. Sem palavras para essa atrocidade.",
             "domingo. Do que adianta um feriado num domingo?")
 
     proximos = list(filter(lambda data: data > date.today(), feriados.keys()))
