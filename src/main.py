@@ -153,7 +153,7 @@ def feriado(update, context):
             "domingo. Do que adianta um feriado num domingo?")
 
     proximos = list(filter(lambda data: data > date.today(), feriados.keys()))
-    if len(l) > 0:
+    if len(proximos) > 0:
         txt = f"Proximo feriado dia{proximos[0].day}/{proximos[0].month} cai numa {weekDays[date.weekday(proximos[0])]}"
     else:
         txt = "Sem mais feriados este ano, foi mal."
