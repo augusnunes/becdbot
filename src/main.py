@@ -210,7 +210,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('fwd', fwd))
     dp.add_handler(CommandHandler('semestre', semestre))
     dp.add_handler(CommandHandler('trancar', trancar))
-    dp.add_handler(CommandHandler('feriado', trancar))
+    dp.add_handler(CommandHandler('feriado', feriado))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
 
     if not args.is_local:
