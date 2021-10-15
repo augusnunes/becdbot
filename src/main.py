@@ -3,6 +3,7 @@ from pendulum import today, datetime, now
 import random
 import os
 import argparse
+import holidays
 
 LINK_GRUPO = os.getenv('LINK_GRUPO')
 
