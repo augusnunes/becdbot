@@ -177,7 +177,7 @@ def feriado(update, context):
 
     proximos = list(filter(lambda data: data > hoje, feriados.keys()))
     if len(proximos) > 0:
-        txt = f"Proximo feriado dia{proximos[0].day}/{proximos[0].month} cai numa {weekDays[dt.weekday(proximos[0])]}"
+        txt = f"Faltam {-(hoje - proximos[0]).days} dias para o proximo feriado, {feriados[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}, cai numa {weekDays[dt.weekday(proximos[0])]}"
     else:
         # o código realmente passa por aki?
         txt = "Sem mais feriados este ano, foi mal."
