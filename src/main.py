@@ -114,28 +114,30 @@ def trancar(update, context):
 
         while True:
             if random.random() < 0.80:
-                if len(l) > 0:
+                if random.random() > 0.95:
+                    txt = "Lamento, seu trancamento falhou."
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                    break
+                if len(l) > 0 :
                     x = random.choice(l)
                     l.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
-                    try:
-                        mins = 3
-                        date_unban = now().add(minutes=mins).int_timestamp
-                        txt = "Tudo bem, concluindo trancamento..."
-                        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
-                        txt = """[@{}](tg://user?id={}) conseguiu trancar o curso e foi embora!
-                        """.format(update.effective_user.first_name, update.effective_user.id)
-                        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
-                        
-                        msg = f"Trancamento concluído, haha. Aguarda {mins} minutos e entra no grupo novamente: {LINK_GRUPO}"
-                        
-                        context.bot.kick_chat_member(chat_id=update.effective_chat.id,
-                                                    user_id=update.effective_user.id,
-                                                    until_date=date_unban)
-                        context.bot.send_message(chat_id=update.effective_user.id, text=msg)
-                    except:
-                        print("Não foi possível trancar o curso")
+                    mins = 3
+                    date_unban = now().add(minutes=mins).int_timestamp
+                    txt = "Tudo bem, concluindo trancamento..."
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                    txt = """[@{}](tg://user?id={}) conseguiu trancar o curso e foi embora!
+                    """.format(update.effective_user.first_name, update.effective_user.id)
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+                    
+                    msg = f"Trancamento concluído, haha. Aguarda {mins} minutos e entra no grupo novamente: {LINK_GRUPO}"
+                    
+                    context.bot.kick_chat_member(chat_id=update.effective_chat.id,
+                                                user_id=update.effective_user.id,
+                                                until_date=date_unban)
+                    context.bot.send_message(chat_id=update.effective_user.id, text=msg)
+
                     return
             else:
                 txt = "Lamento, seu trancamento falhou."
@@ -156,6 +158,7 @@ def feriado(update, context):
     if len(proximos) > 0:
         txt = f"Proximo feriado dia{proximos[0].day}/{proximos[0].month} cai numa {weekDays[date.weekday(proximos[0])]}"
     else:
+        # o código realmente passa por aki?
         txt = "Sem mais feriados este ano, foi mal."
     
     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
@@ -200,12 +203,14 @@ if __name__ == '__main__':
 
     dp = updater.dispatcher
 
+    # Adiciona comandos
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('aulas', aulas))
     dp.add_handler(CommandHandler('maquera', maquera))
     dp.add_handler(CommandHandler('fwd', fwd))
     dp.add_handler(CommandHandler('semestre', semestre))
     dp.add_handler(CommandHandler('trancar', trancar))
+    dp.add_handler(CommandHandler('feriado', trancar))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
 
     if not args.is_local:
