@@ -4,6 +4,7 @@ import random
 import os
 import argparse
 import holidays
+from datetime import date as dt
 
 LINK_GRUPO = os.getenv('LINK_GRUPO') 
 
@@ -164,7 +165,8 @@ def feriado(update, context):
     """
         Comando feriado: Manda o próximo feriado que vamos ter
     """
-    feriados = holidays.CountryHoliday('BRA', prov=None, state='SP', years = date.today().year)
+    hoje = dt.today()
+    feriados = holidays.CountryHoliday('BRA', prov=None, state='SP', years = hoje.year)
     weekDays = ("segunda. Tá safe!",
             "terça. Bora emendar clan!!1!",
             "quarta, bem no meio da semana...",
@@ -173,9 +175,9 @@ def feriado(update, context):
             "sabado. Sem palavras para essa atrocidade.",
             "domingo. Do que adianta um feriado num domingo?")
 
-    proximos = list(filter(lambda data: data > date.today(), feriados.keys()))
+    proximos = list(filter(lambda data: data > hoje, feriados.keys()))
     if len(proximos) > 0:
-        txt = f"Proximo feriado dia{proximos[0].day}/{proximos[0].month} cai numa {weekDays[date.weekday(proximos[0])]}"
+        txt = f"Proximo feriado dia{proximos[0].day}/{proximos[0].month} cai numa {weekDays[dt.weekday(proximos[0])]}"
     else:
         # o código realmente passa por aki?
         txt = "Sem mais feriados este ano, foi mal."
