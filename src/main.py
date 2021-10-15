@@ -123,8 +123,6 @@ def trancar(update, context):
                     l.remove(x)
                     context.bot.send_message(chat_id=update.effective_chat.id, text=x)
                 else:
-                    # colocando mais ações:
-                    #   silenciar por tempo aleatório
                     mins = 3
                     date_unban = now().add(minutes=mins).int_timestamp
                     txt = "Tudo bem, concluindo trancamento..."
@@ -160,6 +158,7 @@ def feriado(update, context):
     if len(proximos) > 0:
         txt = f"Proximo feriado dia{proximos[0].day}/{proximos[0].month} cai numa {weekDays[date.weekday(proximos[0])]}"
     else:
+        # o código realmente passa por aki?
         txt = "Sem mais feriados este ano, foi mal."
     
     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
@@ -204,12 +203,14 @@ if __name__ == '__main__':
 
     dp = updater.dispatcher
 
+    # Adiciona comandos
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('aulas', aulas))
     dp.add_handler(CommandHandler('maquera', maquera))
     dp.add_handler(CommandHandler('fwd', fwd))
     dp.add_handler(CommandHandler('semestre', semestre))
     dp.add_handler(CommandHandler('trancar', trancar))
+    dp.add_handler(CommandHandler('feriado', trancar))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
 
     if not args.is_local:
