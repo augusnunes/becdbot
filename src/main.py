@@ -4,7 +4,7 @@ import random
 import os
 import argparse
 
-LINK_GRUPO = os.getenv('LINK_GRUPO')
+LINK_GRUPO = os.getenv('LINK_GRUPO') 
 
 
 def start(update, context):
@@ -12,13 +12,17 @@ def start(update, context):
 
 
 def fwd(update, context):
+    """
+        Comando fwd: encaminha uma mensagem do canal fwd da estat para o grupo ou vice-versa.
+                    É utilizado para guardar mensagens engraçadas. 
+    """
     is_reply = update.message.reply_to_message
     fwd_name = '@becdbotfwd'
     
     if is_reply:  # encaminha para o fwd
         context.bot.forwardMessage(fwd_name, update.effective_chat.id, is_reply.message_id)
     else:  # encaminha para o grupo
-        max_id = 10
+        max_id = 30
         max_tries = max_id*5
         tries = 0
         while True:
@@ -34,7 +38,9 @@ def fwd(update, context):
 
 
 def aulas(update, context):
-    
+    """
+        Comando aulas: Manda contagem regressiva pra começo das aulas.
+    """
     hoje = today('America/Sao_Paulo')
     aulas = datetime(2021, 8, 16)
     diff = aulas.diff(hoje).in_days()
@@ -59,6 +65,9 @@ def aulas(update, context):
 
 
 def semestre(update, context):
+    """
+        Comando semestre: Contagem regressiva pra acabar o semestre.
+    """
     hoje = today('America/Sao_Paulo')
     # mini ferias
     aulas = datetime(2021, 12, 21)
@@ -85,10 +94,16 @@ def semestre(update, context):
 
 
 def maquera(update, context):
+    """
+        Comando maquera: #descubra
+    """
     context.bot.forward_message(chat_id=update.effective_chat.id, from_chat_id='@becdbotfwd', message_id=2)
 
 
 def trancar(update, context):
+    """
+        Comando trancar: Ao usar este comando, há uma chance pequena de "trancar o curso".
+    """
     if random.random() < 0.2:
         txt = "Desculpe, não tá rolando trancar o curso não."
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
@@ -145,6 +160,9 @@ def trancar(update, context):
                 break
 
 def feriado(update, context):
+    """
+        Comando feriado: Manda o próximo feriado que vamos ter
+    """
     feriados = holidays.CountryHoliday('BRA', prov=None, state='SP', years = date.today().year)
     weekDays = ("segunda. Tá safe!",
             "terça. Bora emendar clan!!1!",
@@ -165,6 +183,9 @@ def feriado(update, context):
 
 
 def send_welcome(update, context, new_member):
+    """
+        Envia mensagem de boas vindas ao entrar no grupo
+    """
     welcome_message = """Bem-vinde, [@{}](tg://user?id={})!
     """.format(new_member.first_name, new_member.id)
 
