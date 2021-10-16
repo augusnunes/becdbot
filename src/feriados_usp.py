@@ -43,3 +43,17 @@ for tabela in tabelas:
             feriados[dt(2021,meses_pt.get(mes),int(dia))] = texto
 
 print(feriados)
+
+# {
+#     datetime.date(2021, 4, 21): 'Tiradentes',
+#     datetime.date(2021, 5, 1): 'Dia do Trabalho',
+#     datetime.date(2021, 6, 3): 'Corpus Christi',
+#     datetime.date(2021, 6, 4): 'Recesso (Corpus Christi)',
+#     datetime.date(2021, 7, 9): 'Revolução  Constitucionalista de 1932',
+#     datetime.date(2021, 7, 10): 'Recesso (Revolução  Constitucionalista de 1932)',
+#     datetime.date(2021, 9, 6): 'Recesso (Independência do Brasil)',
+#     datetime.date(2021, 9, 7): 'Independência do Brasil',
+#     datetime.date(2021, 10, 29): 'Recesso (Consagração ao Funcionário Público)',
+#     datetime.date(2021, 11, 1): 'Recesso (Finados)',
+#     datetime.date(2021, 11, 2): 'Finados'
+# }
