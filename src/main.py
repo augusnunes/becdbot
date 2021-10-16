@@ -3,7 +3,7 @@ from pendulum import today, datetime, now
 import random
 import os
 import argparse
-import holidays
+import feriados_usp
 from datetime import date as dt
 
 LINK_GRUPO = os.getenv('LINK_GRUPO') 
@@ -41,13 +41,16 @@ def fwd(update, context):
 
 def aulas(update, context):
     """
-        Comando aulas: Manda contagem regressiva pra começo das aulas.
+        Comando aulas: Manda contagem regressiva pra começo ou final das aulas.
     """
-    hoje = today('America/Sao_Paulo')
-    aulas = datetime(2021, 8, 16)
-    diff = aulas.diff(hoje).in_days()
-    
-    if hoje < aulas:
+    hoje = dt.today()
+    aulas = feriados_usp.aulas
+
+    proximos = list(filter(lambda data: data > hoje, aulas.keys()))
+    if len(proximos) > 0:
+        txt = f"Faltam {(proximos[0]).days - hoje} dias para {aulas[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+    """ if hoje < aulas:
         frases = [
             'Caalma, caraio. As aulas vão começar em',
             'Porra, bixo. As aulas começam em',
@@ -62,8 +65,22 @@ def aulas(update, context):
 
     else:
         msg = "É hj que começa tudo de novo pohaaAaaAa fodeu :'("
+        
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg) """
     
-    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
+        
+
+def jupiter(update, context):
+    """
+        Comando jupiter: Manda contagem regressiva pra proximo prazo importante para a graduação.
+    """
+    hoje = dt.today()
+    matr = feriados_usp.matri
+
+    proximos = list(filter(lambda data: data > hoje, matr.keys()))
+    if len(proximos) > 0:
+        txt = f"Faltam {(proximos[0]).days - hoje} dias para {matr[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
 
 def semestre(update, context):
@@ -166,7 +183,7 @@ def feriado(update, context):
         Comando feriado: Manda o próximo feriado que vamos ter
     """
     hoje = dt.today()
-    feriados = holidays.CountryHoliday('BRA', prov=None, state='SP', years = hoje.year)
+    feriados = feriados_usp.feriados
     weekDays = ("segunda. Tá safe!",
             "terça. Bora emendar clan!!1!",
             "quarta, bem no meio da semana...",
@@ -235,6 +252,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('semestre', semestre))
     dp.add_handler(CommandHandler('trancar', trancar))
     dp.add_handler(CommandHandler('feriado', feriado))
+    dp.add_handler(CommandHandler('jupiter', jupiter))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
 
     if not args.is_local:
