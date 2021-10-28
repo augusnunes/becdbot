@@ -1,6 +1,5 @@
 python-telegram-bot
 pendulum==2.1.2
 bs4
-re
 requests
 datetime
