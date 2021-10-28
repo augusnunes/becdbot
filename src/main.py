@@ -3,7 +3,7 @@ from pendulum import today, datetime, now
 import random
 import os
 import argparse
-# import feriados_usp
+import feriados_usp
 from datetime import date as dt
 
 LINK_GRUPO = os.getenv('LINK_GRUPO') 
@@ -39,48 +39,48 @@ def fwd(update, context):
                 pass 
 
 
-# def aulas(update, context):
-#     """
-#         Comando aulas: Manda contagem regressiva pra começo ou final das aulas.
-#     """
-#     hoje = dt.today()
-#     aulas = feriados_usp.aulas
+def aulas(update, context):
+    """
+        Comando aulas: Manda contagem regressiva pra começo ou final das aulas.
+    """
+    hoje = dt.today()
+    aulas = feriados_usp.aulas
 
-#     proximos = list(filter(lambda data: data > hoje, aulas.keys()))
-#     if len(proximos) > 0:
-#         txt = f"Faltam {(proximos[0]).days - hoje} dias para {aulas[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
-#         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
-#     """ if hoje < aulas:
-#         frases = [
-#             'Caalma, caraio. As aulas vão começar em',
-#             'Porra, bixo. As aulas começam em',
-#             'Infelizmente já teremos aulas em',
-#             'Poorrraaaa, não me lembra que as aulas começam em'
-#         ]
-#         frase = random.choice(frases)
-#         msg = f'{frase} {diff} dias'
+    proximos = list(filter(lambda data: data > hoje, aulas.keys()))
+    if len(proximos) > 0:
+        txt = f"Faltam {(proximos[0]).days - hoje} dias para {aulas[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+    """ if hoje < aulas:
+        frases = [
+            'Caalma, caraio. As aulas vão começar em',
+            'Porra, bixo. As aulas começam em',
+            'Infelizmente já teremos aulas em',
+            'Poorrraaaa, não me lembra que as aulas começam em'
+        ]
+        frase = random.choice(frases)
+        msg = f'{frase} {diff} dias'
     
-#     elif hoje > aulas:
-#         msg = "Infelizmente, as aulas já começaram. Manda /semestre pra saber quando o semestre vai dar a folguinha."
+    elif hoje > aulas:
+        msg = "Infelizmente, as aulas já começaram. Manda /semestre pra saber quando o semestre vai dar a folguinha."
 
-#     else:
-#         msg = "É hj que começa tudo de novo pohaaAaaAa fodeu :'("
+    else:
+        msg = "É hj que começa tudo de novo pohaaAaaAa fodeu :'("
         
-#     context.bot.send_message(chat_id=update.effective_chat.id, text=msg) """
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg) """
     
         
 
-# def jupiter(update, context):
-#     """
-#         Comando jupiter: Manda contagem regressiva pra proximo prazo importante para a graduação.
-#     """
-#     hoje = dt.today()
-#     matr = feriados_usp.matri
+def jupiter(update, context):
+    """
+        Comando jupiter: Manda contagem regressiva pra proximo prazo importante para a graduação.
+    """
+    hoje = dt.today()
+    matr = feriados_usp.matri
 
-#     proximos = list(filter(lambda data: data > hoje, matr.keys()))
-#     if len(proximos) > 0:
-#         txt = f"Faltam {(proximos[0]).days - hoje} dias para {matr[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
-#         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+    proximos = list(filter(lambda data: data > hoje, matr.keys()))
+    if len(proximos) > 0:
+        txt = f"Faltam {(proximos[0]).days - hoje} dias para {matr[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
 
 def semestre(update, context):
@@ -178,27 +178,27 @@ def trancar(update, context):
                 context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
                 break
 
-# def feriado(update, context):
-#     """
-#         Comando feriado: Manda o próximo feriado que vamos ter
-#     """
-#     hoje = dt.today()
-#     feriados = feriados_usp.feriados
-#     weekDays = ("segunda. Tá safe!",
-#             "terça. Bora emendar clan!!1!",
-#             "quarta, bem no meio da semana...",
-#             "quinta. E vamos de emenda fml!!",
-#             "sexta. Feriadou!",
-#             "sabado. Sem palavras para essa atrocidade.",
-#             "domingo. Do que adianta um feriado num domingo?")
+def feriado(update, context):
+    """
+        Comando feriado: Manda o próximo feriado que vamos ter
+    """
+    hoje = dt.today()
+    feriados = feriados_usp.feriados
+    weekDays = ("segunda. Tá safe!",
+            "terça. Bora emendar clan!!1!",
+            "quarta, bem no meio da semana...",
+            "quinta. E vamos de emenda fml!!",
+            "sexta. Feriadou!",
+            "sabado. Sem palavras para essa atrocidade.",
+            "domingo. Do que adianta um feriado num domingo?")
 
-#     proximos = list(filter(lambda data: data > hoje, feriados.keys()))
-#     if len(proximos) > 0:
-#         txt = f"Faltam {-(hoje - proximos[0]).days} dias para o proximo feriado, {feriados[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}, cai numa {weekDays[dt.weekday(proximos[0])]}"
-#     else:
-#         # o código realmente passa por aki?
-#         txt = "Sem mais feriados este ano, foi mal."
-#     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+    proximos = list(filter(lambda data: data > hoje, feriados.keys()))
+    if len(proximos) > 0:
+        txt = f"Faltam {-(hoje - proximos[0]).days} dias para o proximo feriado, {feriados[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}, cai numa {weekDays[dt.weekday(proximos[0])]}"
+    else:
+        # o código realmente passa por aki?
+        txt = "Sem mais feriados este ano, foi mal."
+    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
 
 def send_welcome(update, context, new_member):
@@ -245,13 +245,13 @@ if __name__ == '__main__':
 
     # Adiciona comandos
     dp.add_handler(CommandHandler('start', start))
-    # dp.add_handler(CommandHandler('aulas', aulas))
+    dp.add_handler(CommandHandler('aulas', aulas))
     dp.add_handler(CommandHandler('maquera', maquera))
     dp.add_handler(CommandHandler('fwd', fwd))
     dp.add_handler(CommandHandler('semestre', semestre))
     dp.add_handler(CommandHandler('trancar', trancar))
-    # dp.add_handler(CommandHandler('feriado', feriado))
-    # dp.add_handler(CommandHandler('jupiter', jupiter))
+    dp.add_handler(CommandHandler('feriado', feriado))
+    dp.add_handler(CommandHandler('jupiter', jupiter))
     dp.add_handler(MessageHandler(Filters.status_update, empty_message))
 
     if not args.is_local:
