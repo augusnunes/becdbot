@@ -48,7 +48,7 @@ def aulas(update, context):
 
     proximos = list(filter(lambda data: data > hoje, aulas.keys()))
     if len(proximos) > 0:
-        txt = f"Faltam {(proximos[0]).days - hoje} dias para {aulas[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
+        txt = f"Faltam {(proximos[0] - hoje).days} dias para {aulas[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
     """ if hoje < aulas:
         frases = [
@@ -79,7 +79,7 @@ def jupiter(update, context):
 
     proximos = list(filter(lambda data: data > hoje, matr.keys()))
     if len(proximos) > 0:
-        txt = f"Faltam {(proximos[0]).days - hoje} dias para {matr[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
+        txt = f"Faltam {(proximos[0] - hoje).days} dias para {matr[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
         context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
 
