@@ -206,6 +206,7 @@ def send_welcome(update, context, new_member):
         Envia mensagem de boas vindas ao entrar no grupo
     """
     welcome_message = """Bem-vinde, [@{}](tg://user?id={})!
+    Se apresenta se você for bixo/bixete/bixe! Questionários fixados para cada curso :)
     """.format(new_member.first_name, new_member.id)
 
     context.bot.send_message(chat_id=update.effective_chat.id,
