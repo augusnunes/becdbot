@@ -22,7 +22,7 @@ meses_pt = {
     'Dezembro': 12
 }
 
-calendario = 'https://uspdigital.usp.br/jupiterweb/jupCalendario2021.jsp'
+calendario = 'https://uspdigital.usp.br/jupiterweb/jupCalendario2022.jsp'
 
 pagina = requests.get(calendario)
 soup = BeautifulSoup(pagina.content, 'html.parser')
@@ -42,31 +42,31 @@ for tabela in tabelas:
         if texto.find('Não haverá aula') != -1:
             texto = re.search('^[^-.]+',texto)[0].strip()
             dia = re.search('\d+',data)[0]
-            feriados[dt(2021,meses_pt.get(mes),int(dia))] = texto
+            feriados[dt(2022,meses_pt.get(mes),int(dia))] = texto
         elif texto.find('DAS AULAS') != -1:
             texto = re.search('^[^-.]+',texto)[0].strip()
             dia = re.search('\d+',data)[0]
-            aulas[dt(2021,meses_pt.get(mes),int(dia))] = texto
+            aulas[dt(2022,meses_pt.get(mes),int(dia))] = texto
         elif texto.find('nteração') != -1 or texto.find('trancamento') != -1:
             texto = re.search('^[^-.]+',texto)[0].strip()
             dia = re.search('\d+',data)[0]
-            matri[dt(2021,meses_pt.get(mes),int(dia))] = texto 
+            matri[dt(2022,meses_pt.get(mes),int(dia))] = texto 
 
 #print(feriados)
 #print(aulas)
 #print(matri)
 
 # {
-#     datetime.date(2021, 4, 21): 'Tiradentes',
-#     datetime.date(2021, 5, 1): 'Dia do Trabalho',
-#     datetime.date(2021, 6, 3): 'Corpus Christi',
-#     datetime.date(2021, 6, 4): 'Recesso (Corpus Christi)',
-#     datetime.date(2021, 7, 9): 'Revolução  Constitucionalista de 1932',
-#     datetime.date(2021, 7, 10): 'Recesso (Revolução  Constitucionalista de 1932)',
-#     datetime.date(2021, 9, 6): 'Recesso (Independência do Brasil)',
-#     datetime.date(2021, 9, 7): 'Independência do Brasil',
-#     datetime.date(2021, 10, 29): 'Recesso (Consagração ao Funcionário Público)',
-#     datetime.date(2021, 11, 1): 'Recesso (Finados)',
-#     datetime.date(2021, 11, 2): 'Finados'
+#     datetime.date(2022, 4, 21): 'Tiradentes',
+#     datetime.date(2022, 5, 1): 'Dia do Trabalho',
+#     datetime.date(2022, 6, 3): 'Corpus Christi',
+#     datetime.date(2022, 6, 4): 'Recesso (Corpus Christi)',
+#     datetime.date(2022, 7, 9): 'Revolução  Constitucionalista de 1932',
+#     datetime.date(2022, 7, 10): 'Recesso (Revolução  Constitucionalista de 1932)',
+#     datetime.date(2022, 9, 6): 'Recesso (Independência do Brasil)',
+#     datetime.date(2022, 9, 7): 'Independência do Brasil',
+#     datetime.date(2022, 10, 29): 'Recesso (Consagração ao Funcionário Público)',
+#     datetime.date(2022, 11, 1): 'Recesso (Finados)',
+#     datetime.date(2022, 11, 2): 'Finados'
 # }
 
