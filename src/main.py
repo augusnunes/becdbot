@@ -49,7 +49,10 @@ def aulas(update, context):
     proximos = list(filter(lambda data: data > hoje, aulas.keys()))
     if len(proximos) > 0:
         txt = f"Faltam {(proximos[0] - hoje).days} dias para {aulas[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
-        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+    else:
+        txt = "Não tenho datas armazenadas."
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
     """ if hoje < aulas:
         frases = [
             'Caalma, caraio. As aulas vão começar em',
@@ -79,8 +82,12 @@ def jupiter(update, context):
 
     proximos = list(filter(lambda data: data > hoje, matr.keys()))
     if len(proximos) > 0:
-        txt = f"Faltam {(proximos[0] - hoje).days} dias para {matr[proximos[0]]} dia {proximos[0].day}/{proximos[0].month}"
-        context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
+        txt = f"Faltam {(proximos[0] - hoje).days} dias para {matr[proximos[0]]}, dia {proximos[0].day}/{proximos[0].month}"
+
+    else:
+        txt = "Não tenho a mínima ideia."
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
 
 
 def semestre(update, context):
@@ -89,22 +96,19 @@ def semestre(update, context):
     """
     hoje = today('America/Sao_Paulo')
     # mini ferias
-    aulas = datetime(2021, 12, 21)
+    aulas = datetime(2022, 7, 23)
     diff = aulas.diff(hoje).in_days()
-    # ferias ferias
-    aulas2 = datetime(2022, 1, 14)
-    diff2 = aulas2.diff(hoje).in_days()
     
-    volta = datetime(2021, 8, 17)
+    volta = datetime(2022, 3, 14)
     if hoje >= volta:
         frases = [
-            'Por favor, eu não aguento mais {} dias. Até o fim em janeiro, {} dias.',
-            'Tenhamos fé, ainda faltam {} dias para o recesso, e {} dias para o fim de tudo',
-            'Sinto muito em lhe informar que restam {} dias para as mini férias, e {} dias para o término do semestre',
-            'Desculpe, faltam {} dias para o final do semestre este ano e mais {} dias pro final real oficial'
+            'Por favor, eu não aguento mais {} dias. Vou voltar pra casa.',
+            'Tenhamos fé, ainda faltam {} dias para o recesso.',
+            'Sinto muito em lhe informar que restam {} dias para o término do semestre',
+            'Desculpe, faltam {} dias para o final do semestre.'
         ]
         frase = random.choice(frases)
-        msg = frase.format(diff, diff2)
+        msg = frase.format(diff)
 
     else:
         msg = "De alguma maneira, as aulas ainda não começaram. Manda /aulas pra saber quando elas voltarão."
@@ -135,8 +139,8 @@ def trancar(update, context):
             "Enviando emojis ofensivos para a grad...",
             "Passando trote para a PPUSP...",
             "Devolvendo bandeija com restos de comida...",
-            "Ligando para a Cibele...",
-            "Avisando o governador...",
+            "Ligando para a Curi...",
+            "Avisando ao governador João Dória...",
             "Denunciando a turma por cola...",
             "Chamando engenheiros de Cientistas de Dados....",
             "Usando drogas na universidade....",
