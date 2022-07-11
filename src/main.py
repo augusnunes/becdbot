@@ -151,7 +151,7 @@ def trancar(update, context):
         ]
 
         while True:
-            if random.random() < 0.80:
+            if random.random() < 0.90:
                 if random.random() > 0.95:
                     txt = "Lamento, seu trancamento falhou."
                     context.bot.send_message(chat_id=update.effective_chat.id, text=txt)
